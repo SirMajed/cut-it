@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body{
+        @apply font-primary
+    }
+}
+
+@font-face {
+    font-family: 'Quantico';
+    src: url(/fonts/Quantico-Regular.ttf) ;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Quantico';
+    src: url(/fonts/Quantico-Bold.ttf);
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Quantico';
+    src: url(/fonts/Quantico-Italic.ttf);
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Quantico';
+    src: url(/fonts/Quantico-BoldItalic.ttf) ;
+    font-weight: bolder;
+    font-style: italic;
+}
+
