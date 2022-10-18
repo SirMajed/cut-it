@@ -3,6 +3,7 @@ import { useState } from "react";
 import svgIcon from "../public/icons/cut.svg";
 import { TbFidgetSpinner } from "react-icons/tb";
 import Head from "next/head";
+import Image from "next/image";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ export default function Home() {
             CUT IT is free shorten url service provided by{" "}
             <a
               href="https://urlo.in"
-              target={"_blank"}
+              target={"noopener noreferrer"}
               className="italic text-sky-800 underline cursor-pointer"
             >
               urlo.in
@@ -74,8 +75,8 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col  gap-5 items-center justify-center bg-sky-500 w-1/2">
-        <img src={svgIcon.src} height={200} width={200} alt="" />
-        <a href="https://www.linkedin.com/in/alhasenmajed/" target={"_blank"} className="italic opacity-10">By Majed Alhasin</a>
+        <Image src={svgIcon.src} height={200} width={200} alt="" />
+        <a href="https://www.linkedin.com/in/alhasenmajed/" target={"noopener noreferrer"} className="italic opacity-10">By Majed Alhasin</a>
       </div>
     </div>
     </>
