@@ -50,7 +50,7 @@ export default function Home() {
           <div className="w-3/4">
             <h1 className="text-7xl text-sky-800 font-primary">CUT IT</h1>
             <p className="px-1 py-2 font-primary">
-              CUT IT is free shorten url service provided by
+              CUT IT is free shorten url service provided by 
               <a
                 href="https://urlo.in"
                 target={"noopener noreferrer"}
