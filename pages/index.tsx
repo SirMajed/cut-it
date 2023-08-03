@@ -6,20 +6,32 @@ import { MdContentCopy, MdCheck } from "react-icons/md";
 import Head from "next/head";
 import Image from "next/image";
 import copy from "copy-to-clipboard";
+
 export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [shortUrl, setShortUrl] = useState("");
   const [copied, setCopied] = useState(false);
+
   const cutUrl = async (e: any) => {
     e.preventDefault();
+
     try {
       setLoading(true);
-      const res = await axios.post("https://api.urlo.in/api/short-url", {
-        originalUrl: url,
-        userName: "sidrozzg@gmail.com",
-      });
-      setShortUrl(res.data.data.shortUrl);
+      const res = await axios.post(
+        "https://api.short.io/links",
+        {
+          originalURL: url,
+          domain: "go.majed.work",
+        },
+        {
+          headers: {
+            authorization: process.env.API,
+          },
+          responseType: "json",
+        }
+      );
+      setShortUrl(res.data.shortURL);
       setLoading(false);
       console.log(res);
     } catch (error: any) {
@@ -50,7 +62,7 @@ export default function Home() {
           <div className="w-3/4">
             <h1 className="text-7xl text-sky-800 font-primary">CUT IT</h1>
             <p className="px-1 py-2 font-primary">
-              CUT IT is free shorten url service provided by 
+              CUT IT is free shorten url service provided by
               <a
                 href="https://urlo.in"
                 target={"noopener noreferrer"}
@@ -89,26 +101,26 @@ export default function Home() {
             ) : (
               <div>
                 <form onSubmit={cutUrl}>
-                <input
-                disabled={loading}
-                  onChange={(e: any) => setUrl(e.target.value)}
-                  placeholder="Enter URL"
-                  className="p-3 rounded-md w-full focus:outline-none appearance-none focus:border-sky-800 transition focus:ring-0"
-                  type="text"
-                />
-                <button
-                type="submit"
-                  className="bg-sky-700 hover:bg-sky-800 transition text-white px-3 py-1.5 mt-4 rounded-md"
-                >
-                  {loading ? (
-                    <TbFidgetSpinner
-                      className="text-white animate-spin"
-                      size={20}
-                    />
-                  ) : (
-                    "Shorten URL"
-                  )}
-                </button>
+                  <input
+                    disabled={loading}
+                    onChange={(e: any) => setUrl(e.target.value)}
+                    placeholder="Enter URL"
+                    className="p-3 rounded-md w-full focus:outline-none appearance-none focus:border-sky-800 transition focus:ring-0"
+                    type="text"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-sky-700 hover:bg-sky-800 transition text-white px-3 py-1.5 mt-4 rounded-md"
+                  >
+                    {loading ? (
+                      <TbFidgetSpinner
+                        className="text-white animate-spin"
+                        size={20}
+                      />
+                    ) : (
+                      "Shorten URL"
+                    )}
+                  </button>
                 </form>
               </div>
             )}
