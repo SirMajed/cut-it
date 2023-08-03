@@ -6,7 +6,7 @@ import { MdContentCopy, MdCheck } from "react-icons/md";
 import Head from "next/head";
 import Image from "next/image";
 import copy from "copy-to-clipboard";
-
+import shortenURL from "./api/shortenURL";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,25 +18,20 @@ export default function Home() {
 
     try {
       setLoading(true);
-      const res = await axios.post(
-        "https://api.short.io/links",
-        {
-          originalURL: url,
-          domain: "go.majed.work",
+      const res = await fetch("/api/shortenURL", {
+        method: "POST",
+        body: JSON.stringify({originalUrl: url}),
+        headers: {
+            "Content-Type": "application/json",
         },
-        {
-          headers: {
-            authorization: process.env.NEXT_PUBLIC_API,
-          },
-          responseType: "json",
-        }
-      );
-      setShortUrl(res.data.shortURL);
-      setLoading(false);
+    });
+      const data = await res.json();
       console.log(res);
+      
+      setShortUrl(data);
+      setLoading(false);
     } catch (error: any) {
       setLoading(false);
-      console.log(error);
     }
   };
 
@@ -64,13 +59,13 @@ export default function Home() {
             <p className="px-1 py-2 font-primary">
               CUT IT is free shorten url service provided by
               <a
-                href="https://urlo.in"
+                href="https://short.io"
                 target={"noopener noreferrer"}
-                className="italic text-sky-800 underline cursor-pointer"
+                className="italic text-sky-800 underline cursor-pointer mx-1"
               >
-                urlo.in
+                short.io
               </a>{" "}
-              and this website is just a simple minify design by Majed Alhasin 🫡
+              and it uses my own custom domain
             </p>
             {shortUrl ? (
               <div>
@@ -129,13 +124,7 @@ export default function Home() {
 
         <div className="flex flex-col  gap-5 items-center justify-center bg-sky-500 w-1/2">
           <Image src={svgIcon.src} height={200} width={200} alt="" />
-          <a
-            href="https://www.linkedin.com/in/alhasenmajed/"
-            target={"noopener noreferrer"}
-            className="italic opacity-10"
-          >
-            By Majed Alhasin
-          </a>
+          
         </div>
       </div>
     </>
