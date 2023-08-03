@@ -26,7 +26,7 @@ export default function Home() {
         },
         {
           headers: {
-            authorization: process.env.API,
+            authorization: process.env.NEXT_PUBLIC_API,
           },
           responseType: "json",
         }
